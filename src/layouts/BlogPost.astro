@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 
 import ShareButtons from "@/components/blog/ShareButtons.astro";
 import Mermaid from "@/components/blog/Mermaid.astro";
+import Abc from "@/components/blog/Abc.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
 import { getAllPosts, getPostSortDate, sortMDByDate } from "@/data/post";
 import { siteConfig } from "@/site-config";
@@ -125,6 +126,7 @@ const giscusThemes = import.meta.env.PROD
 				<slot />
 			</article>
 			<Mermaid />
+			<Abc />
 
 			<ShareButtons title={title} url={postUrl} description={description} />
 

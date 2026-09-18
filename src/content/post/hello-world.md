@@ -48,6 +48,18 @@ $$
 \int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
 $$
 
+## Music Sheet
+
+```abc
+X:1
+T:Cooley's
+M:4/4
+L:1/8
+K:Emin
+|:D2|EB{c}BA B2 EB|~B2 AB dBAG|FDAD BDAD|FDAD dAFD|
+EB{c}BA B2 EB|~B2 AB defg|afge fefd|1 (3efe dB BAFD:|2 (3efe dB BA B2||
+```
+
 ## Quotes & emphasis
 
 > A blockquote sits with a left rule, in italics, slightly muted.

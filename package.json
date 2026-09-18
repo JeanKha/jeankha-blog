@@ -28,6 +28,7 @@
 		"@fontsource-variable/jetbrains-mono": "^5.2.8",
 		"@fontsource-variable/newsreader": "^5.2.10",
 		"@playform/compress": "^0.2.3",
+		"abcjs": "^6.7.0",
 		"astro": "7.0.4",
 		"astro-expressive-code": "^0.44.0",
 		"astro-icon": "^1.1.5",
@@ -74,6 +75,9 @@
 		"overrides": {
 			"sharp": "^0.35.3",
 			"postcss": "^8.5.15"
-		}
+		},
+		"ignoredBuiltDependencies": [
+			"esbuild"
+		]
 	}
 }

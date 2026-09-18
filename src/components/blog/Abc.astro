@@ -1,0 +1,152 @@
+<script>
+	const blocks = document.querySelectorAll("pre.abc-notation");
+	if (blocks.length) {
+		const observer = new IntersectionObserver((entries) => {
+			if (!entries.some((entry) => entry.isIntersecting)) return;
+			observer.disconnect();
+			import("../../scripts/abc").catch((error) => console.error("Could not load abcjs", error));
+		}, { rootMargin: "200px" });
+		blocks.forEach((block) => observer.observe(block));
+	}
+</script>
+
+<style is:global>
+	.post-article pre.abc-notation {
+		margin: 2rem 0;
+		padding: 1.25rem;
+		border: 1px solid hsl(var(--theme-text) / 0.15);
+		border-radius: 0.5rem;
+		color: hsl(var(--theme-text));
+	}
+
+	/* Chỉ phần khuông nhạc mới cuộn ngang, khung ngoài không bao giờ cuộn */
+	.post-article .abc-notation__score {
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
+
+	.post-article .abc-notation__score svg {
+		display: block;
+		margin-inline: auto;
+	}
+
+	/* --- Thanh playback, style lại theo theme của site --- */
+	.post-article .abc-notation__controls {
+		margin-top: 1rem;
+	}
+
+	.post-article .abcjs-inline-audio {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		height: auto;
+		padding: 0.4rem 0.6rem;
+		background: hsl(var(--theme-text) / 0.06);
+		border: 1px solid hsl(var(--theme-text) / 0.15);
+		border-radius: 999px;
+		box-sizing: border-box;
+	}
+
+	.post-article .abcjs-inline-audio.abcjs-disabled {
+		opacity: 0.5;
+	}
+
+	.post-article .abcjs-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 1.75rem;
+		height: 1.75rem;
+		padding: 0;
+		margin: 0;
+		background: none !important;
+		border: 1px solid transparent;
+		border-radius: 999px;
+		cursor: pointer;
+		box-sizing: border-box;
+	}
+
+	.post-article .abcjs-btn:hover {
+		background: hsl(var(--theme-text) / 0.1) !important;
+	}
+
+	/* Ép CỨNG kích thước icon — đây là chỗ chặn hiện tượng nhảy layout */
+	.post-article .abcjs-btn svg {
+		width: 0.85rem;
+		height: 0.85rem;
+		display: block;
+	}
+
+	.post-article .abcjs-btn g {
+		fill: hsl(var(--theme-text));
+		stroke: hsl(var(--theme-text));
+	}
+
+	.post-article .abcjs-midi-loop.abcjs-pushed,
+	.post-article .abcjs-midi-reset.abcjs-pushed {
+		border-color: hsl(var(--theme-accent));
+		background: hsl(var(--theme-accent) / 0.15) !important;
+	}
+
+	/* Chuyển play/pause/loading: luôn cùng 1 khung cố định ở trên, chỉ đổi icon bên trong */
+	.post-article .abcjs-midi-start .abcjs-pause-svg,
+	.post-article .abcjs-midi-start .abcjs-loading-svg {
+		display: none;
+	}
+
+	.post-article .abcjs-midi-start.abcjs-pushed .abcjs-play-svg,
+	.post-article .abcjs-midi-start.abcjs-loading .abcjs-play-svg {
+		display: none;
+	}
+
+	.post-article .abcjs-midi-start.abcjs-pushed .abcjs-pause-svg {
+		display: block;
+	}
+
+	.post-article .abcjs-midi-start.abcjs-loading .abcjs-loading-svg {
+		display: block;
+		animation: abc-spin 1s linear infinite;
+	}
+
+	@keyframes abc-spin {
+		from { transform: rotate(0deg); }
+		to { transform: rotate(360deg); }
+	}
+
+	.post-article .abcjs-midi-progress-background {
+		flex: 1;
+		position: relative;
+		height: 6px;
+		margin: 0 0.25rem;
+		background: hsl(var(--theme-text) / 0.15);
+		border: none;
+		border-radius: 999px;
+		padding: 0;
+		cursor: pointer;
+	}
+
+	.post-article .abcjs-midi-progress-indicator {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		width: 0.7rem;
+		height: 0.7rem;
+		margin-left: -0.35rem;
+		background: hsl(var(--theme-accent));
+		border-radius: 999px;
+		transform: translateY(-50%);
+	}
+
+	.post-article .abcjs-midi-clock {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: hsl(var(--theme-text) / 0.72);
+		font-variant-numeric: tabular-nums;
+		white-space: nowrap;
+	}
+
+	.post-article .abcjs-css-warning {
+		display: none;
+	}
+</style>
