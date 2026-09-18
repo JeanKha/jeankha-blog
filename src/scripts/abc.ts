@@ -1,5 +1,48 @@
 export {};
 
+import type { NoteTimingEvent } from "abcjs";
+
+function createCursorControl(container: HTMLElement) {
+	function clearHighlights() {
+		container.querySelectorAll(".abcjs-highlight").forEach((el) => el.classList.remove("abcjs-highlight"));
+	}
+	return {
+		onStart() {
+			const svg = container.querySelector("svg");
+			if (!svg) return;
+			const cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
+			cursor.setAttribute("class", "abcjs-cursor");
+			cursor.setAttribute("x1", "0");
+			cursor.setAttribute("y1", "0");
+			cursor.setAttribute("x2", "0");
+			cursor.setAttribute("y2", "0");
+			svg.appendChild(cursor);
+		},
+		onEvent(ev: NoteTimingEvent) {
+			if (ev.measureStart && ev.left === undefined) return; // khoảng nghỉ giữa các dòng, bỏ qua
+			clearHighlights();
+			for (const noteEls of ev.elements ?? []) {
+				for (const el of noteEls) el.classList.add("abcjs-highlight");
+			}
+			const cursor = container.querySelector("svg .abcjs-cursor");
+			if (cursor && ev.left !== undefined && ev.top !== undefined && ev.height !== undefined) {
+				cursor.setAttribute("x1", String(ev.left - 2));
+				cursor.setAttribute("x2", String(ev.left - 2));
+				cursor.setAttribute("y1", String(ev.top));
+				cursor.setAttribute("y2", String(ev.top + ev.height));
+			}
+		},
+		onFinished() {
+			clearHighlights();
+			const cursor = container.querySelector("svg .abcjs-cursor");
+			cursor?.setAttribute("x1", "0");
+			cursor?.setAttribute("x2", "0");
+			cursor?.setAttribute("y1", "0");
+			cursor?.setAttribute("y2", "0");
+		},
+	};
+}
+
 const blocks = Array.from(document.querySelectorAll<HTMLElement>("pre.abc-notation"));
 
 if (blocks.length) {
@@ -17,7 +60,6 @@ if (blocks.length) {
 
 				let visualObj;
 				try {
-					// Đo đúng chiều rộng khung chứa thật để bản nhạc lấp đầy, không bị cụt
 					const staffwidth = Math.max(300, notationEl.clientWidth || 660);
 					[visualObj] = abcjs.renderAbc(notationEl, source, {
 						responsive: "resize",
@@ -36,7 +78,7 @@ if (blocks.length) {
 				}
 
 				const synthControl = new abcjs.synth.SynthController();
-				synthControl.load(controlsEl, null, {
+				synthControl.load(controlsEl, createCursorControl(notationEl), {
 					displayLoop: true,
 					displayRestart: true,
 					displayPlay: true,
