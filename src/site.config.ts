@@ -16,11 +16,11 @@ export const siteConfig: SiteConfig = {
 	lang: "vi-VN",
 	ogLocale: "vi_VN",
 	sortPostsByUpdatedDate: false,
-	title: "Astro Sienna",
+	title: "Jean Kha",
 	hideThemeCredit: false,
 	profile: {
 		name: "Jean Kha",
-		email: "jean@example.com",
+		email: "jeancongkha@gmail.com",
 		// github: "https://github.com/jeankha",
 		// linkedin: "https://www.linkedin.com/in/jeankha/",
 		// jobTitle: "Software Engineer",
