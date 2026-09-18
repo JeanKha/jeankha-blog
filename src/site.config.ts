@@ -2,9 +2,9 @@ import type { SiteConfig } from "@/types";
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
 
 export const siteConfig: SiteConfig = {
-	author: "Your Name",
+	author: "Jean Kha",
 	date: {
-		locale: "en-US",
+		locale: "vi-VN",
 		options: {
 			day: "numeric",
 			month: "short",
@@ -12,21 +12,21 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	description:
-		"A minimal personal blog & writing space, built with Astro. Notes on whatever I happen to be thinking about — usually some mix of code, design, and the occasional half-formed idea. Replace this paragraph in src/site.config.ts to make the site your own.",
-	lang: "en-US",
-	ogLocale: "en_US",
+		"Một blog cá nhân đơn giản, nơi chia sẻ những gì tôi thích :)).",
+	lang: "vi-VN",
+	ogLocale: "vi_VN",
 	sortPostsByUpdatedDate: false,
 	title: "Astro Sienna",
 	hideThemeCredit: false,
 	profile: {
-		name: "John Doe",
-		email: "john@example.com",
-		github: "https://github.com/example",
-		linkedin: "https://www.linkedin.com/in/example/",
-		jobTitle: "Software Engineer",
-		employer: "Example Inc.",
-		employerUrl: "https://example.com",
-		alumni: "Example University",
+		name: "Jean Kha",
+		email: "jean@example.com",
+		// github: "https://github.com/jeankha",
+		// linkedin: "https://www.linkedin.com/in/jeankha/",
+		// jobTitle: "Software Engineer",
+		// employer: "Example Inc.",
+		// employerUrl: "https://example.com",
+		// alumni: "Example University",
 		avatar: "/avatar.png",
 	},
 	// Uncomment & fill in to enable Giscus comments on every post.
