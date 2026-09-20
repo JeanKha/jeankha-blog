@@ -52,12 +52,14 @@ $$
 
 ```abc
 X:1
-T:Cooley's
-M:4/4
-L:1/8
-K:Emin
-|:D2|EB{c}BA B2 EB|~B2 AB dBAG|FDAD BDAD|FDAD dAFD|
-EB{c}BA B2 EB|~B2 AB defg|afge fefd|1 (3efe dB BAFD:|2 (3efe dB BA B2||
+T: Ben Cu To
+C: Sam lúc lắc
+M:2/4
+L:1/16
+Q: 110
+K:C
+G2 |: "C"c3 e e2 G2 | c3 e e2 e2 | c2 e2 e2 e2 | "G7"d4-d2 G2 |
+d3 e e2 e2 | e3 e e2 e2 | e2 c2 G2 e2 |1 "C"c4-c2 G2 :|2 "C"c8 |]
 ```
 
 ## Quotes & emphasis

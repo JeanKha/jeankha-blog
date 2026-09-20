@@ -19,17 +19,20 @@ function createCursorControl(container: HTMLElement) {
 			svg.appendChild(cursor);
 		},
 		onEvent(ev: NoteTimingEvent) {
-			if (ev.measureStart && ev.left === undefined) return; // khoảng nghỉ giữa các dòng, bỏ qua
+			if (ev.measureStart && ev.left === undefined) return;
 			clearHighlights();
-			for (const noteEls of ev.elements ?? []) {
-				for (const el of noteEls) el.classList.add("abcjs-highlight");
-			}
-			const cursor = container.querySelector("svg .abcjs-cursor");
-			if (cursor && ev.left !== undefined && ev.top !== undefined && ev.height !== undefined) {
+			const noteEls = (ev.elements ?? []).flat();
+			for (const el of noteEls) el.classList.add("abcjs-highlight");
+
+			const cursor = container.querySelector("svg .abcjs-cursor") as SVGLineElement | null;
+			if (cursor && ev.left !== undefined && noteEls.length) {
+				const boxes = noteEls.map((el) => (el as unknown as SVGGraphicsElement).getBBox());
+				const top = Math.min(...boxes.map((b) => b.y));
+				const bottom = Math.max(...boxes.map((b) => b.y + b.height));
 				cursor.setAttribute("x1", String(ev.left - 2));
 				cursor.setAttribute("x2", String(ev.left - 2));
-				cursor.setAttribute("y1", String(ev.top));
-				cursor.setAttribute("y2", String(ev.top + ev.height));
+				cursor.setAttribute("y1", String(top));
+				cursor.setAttribute("y2", String(bottom));
 			}
 		},
 		onFinished() {

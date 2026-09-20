@@ -12,12 +12,12 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	description:
-		"Một blog cá nhân đơn giản, nơi chia sẻ những gì tôi thích :)).",
+		"Đơn giản đây là nơi chia sẻ những gì tôi thích. Từ âm nhạc, phim ảnh, kiến thức học được cho tới những thứ linh tinh khác. Viết để chia sẻ những gì học được, những gì trải nghiệm và những gì cảm nhận.",
 	lang: "vi-VN",
 	ogLocale: "vi_VN",
 	sortPostsByUpdatedDate: false,
 	title: "Jean Kha",
-	hideThemeCredit: false,
+	hideThemeCredit: true,
 	profile: {
 		name: "Jean Kha",
 		email: "jeancongkha@gmail.com",
